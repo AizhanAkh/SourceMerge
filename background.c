@@ -298,10 +298,7 @@ int background_functions(
 
   /* baryons */
   pvecback[pba->index_bg_rho_b] = pba->Omega0_b * pow(pba->H0,2) / pow(a_rel,3);
-<<<<<<< HEAD
   // if(a_rel >1e-3 && a_rel < 2e-3)printf("pvecback[pba->index_bg_rho_b] %e z %e\n", pvecback[pba->index_bg_rho_b],1/a_rel-1);
-=======
->>>>>>> master
   rho_tot += pvecback[pba->index_bg_rho_b];
   p_tot += 0;
   rho_m += pvecback[pba->index_bg_rho_b];
@@ -314,7 +311,6 @@ int background_functions(
     rho_m += pvecback[pba->index_bg_rho_cdm];
   }
 
-<<<<<<< HEAD
   /* dmeff */
   if (pba->has_dmeff == _TRUE_) {
     pvecback[pba->index_bg_rho_dmeff] = pba->Omega0_dmeff * pow(pba->H0,2) / pow(a_rel,3);
@@ -323,8 +319,6 @@ int background_functions(
     rho_m += pvecback[pba->index_bg_rho_dmeff];
   }
 
-=======
->>>>>>> master
   /* dcdm */
   if (pba->has_dcdm == _TRUE_) {
     /* Pass value of rho_dcdm to output */
@@ -445,7 +439,6 @@ int background_functions(
   /** - compute relativistic density to total density ratio */
   pvecback[pba->index_bg_Omega_r] = rho_r / rho_tot;
 
-<<<<<<< HEAD
   /** - make place holders for dmeff quantities that are computed in thermodynamics */
   if (pba->has_dmeff == _TRUE_) {
     pvecback[pba->index_bg_Tdmeff] = pba->T_cmb / a_rel;
@@ -462,8 +455,6 @@ int background_functions(
     pvecback[pba->index_bg_cdmeff2] = (pba->T_cmb/a_rel)*_k_B_/(pba->m_dmeff*_c_*_c_) * (1. + a_rel / 3.);
   }
 
-=======
->>>>>>> master
   /** - compute other quantities in the exhaustive, redundant format */
   if (return_format == pba->long_info) {
 
@@ -794,10 +785,7 @@ int background_indices(
   /** - initialize all flags: which species are present? */
 
   pba->has_cdm = _FALSE_;
-<<<<<<< HEAD
   pba->has_dmeff = _FALSE_;
-=======
->>>>>>> master
   pba->has_ncdm = _FALSE_;
   pba->has_dcdm = _FALSE_;
   pba->has_dr = _FALSE_;
@@ -810,14 +798,11 @@ int background_indices(
   if (pba->Omega0_cdm != 0.)
     pba->has_cdm = _TRUE_;
 
-<<<<<<< HEAD
   if (pba->Omega0_dmeff != 0.){
     pba->has_dmeff = _TRUE_;
     pba->index_dmeff_niter = 0;
   }
 
-=======
->>>>>>> master
   if (pba->Omega0_ncdm_tot != 0.)
     pba->has_ncdm = _TRUE_;
 
@@ -865,7 +850,6 @@ int background_indices(
   /* - index for rho_cdm */
   class_define_index(pba->index_bg_rho_cdm,pba->has_cdm,index_bg,1);
 
-<<<<<<< HEAD
   /* - index for rho_dmeff */
   class_define_index(pba->index_bg_rho_dmeff,pba->has_dmeff,index_bg,1);
 
@@ -896,8 +880,7 @@ int background_indices(
   /* - index for c2 for dmeff (estimate only, if T_b=T_photon always) */
   class_define_index(pba->index_bg_cdmeff2,pba->has_dmeff,index_bg,1);
 
-=======
->>>>>>> master
+
   /* - indices for ncdm. We only define the indices for ncdm1
      (density, pressure, pseudo-pressure), the other ncdm indices
      are contiguous */
@@ -977,10 +960,6 @@ int background_indices(
   /* -> end of indices in the long vector of background values */
   pba->bg_size = index_bg;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
   /* - now, indices in vector of variables to integrate.
      First {B} variables, then {C} variables. */
 
@@ -2106,7 +2085,6 @@ int background_output_titles(struct background * pba,
   class_store_columntitle(titles,"(.)rho_g",_TRUE_);
   class_store_columntitle(titles,"(.)rho_b",_TRUE_);
   class_store_columntitle(titles,"(.)rho_cdm",pba->has_cdm);
-<<<<<<< HEAD
   class_store_columntitle(titles,"(.)rho_dmeff",pba->has_dmeff);
   class_store_columntitle(titles,"T_dmeff",pba->has_dmeff);
   class_store_columntitle(titles,"Vrms",pba->has_dmeff);
@@ -2117,8 +2095,6 @@ int background_output_titles(struct background * pba,
   class_store_columntitle(titles,"heat_chi_dmeff [K/Mpc]",pba->has_dmeff);
   class_store_columntitle(titles,"heat_b_dmeff [K/Mpc]",pba->has_dmeff);
   class_store_columntitle(titles,"c_dmeff^2",pba->has_dmeff);
-=======
->>>>>>> master
   if (pba->has_ncdm == _TRUE_){
     for (n=0; n<pba->N_ncdm; n++){
       sprintf(tmp,"(.)rho_ncdm[%d]",n);
@@ -2173,7 +2149,6 @@ int background_output_data(
     class_store_double(dataptr,pvecback[pba->index_bg_rho_g],_TRUE_,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_rho_b],_TRUE_,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_rho_cdm],pba->has_cdm,storeidx);
-<<<<<<< HEAD
     class_store_double(dataptr,pvecback[pba->index_bg_rho_dmeff],pba->has_dmeff,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_Tdmeff],pba->has_dmeff,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_Vrms],pba->has_dmeff,storeidx);
@@ -2184,8 +2159,7 @@ int background_output_data(
     class_store_double(dataptr,pvecback[pba->index_bg_heat_chi_dmeff],pba->has_dmeff,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_heat_b_dmeff],pba->has_dmeff,storeidx);
     class_store_double(dataptr,pvecback[pba->index_bg_cdmeff2],pba->has_dmeff,storeidx);
-=======
->>>>>>> master
+
     if (pba->has_ncdm == _TRUE_){
       for (n=0; n<pba->N_ncdm; n++){
         class_store_double(dataptr,pvecback[pba->index_bg_rho_ncdm1+n],_TRUE_,storeidx);
@@ -2288,11 +2262,8 @@ int background_derivs(
   rho_M = pvecback[pba->index_bg_rho_b];
   if (pba->has_cdm)
     rho_M += pvecback[pba->index_bg_rho_cdm];
-<<<<<<< HEAD
   if (pba->has_dmeff)
     rho_M += pvecback[pba->index_bg_rho_dmeff];
-=======
->>>>>>> master
   dy[pba->index_bi_D] = y[pba->index_bi_D_prime];
   dy[pba->index_bi_D_prime] = -a*H*y[pba->index_bi_D_prime] + 1.5*a*a*rho_M*y[pba->index_bi_D];
 

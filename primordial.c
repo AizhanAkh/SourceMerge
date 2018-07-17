@@ -456,13 +456,10 @@ int primordial_init(
       ppm->n_s = (lnpk_plus-lnpk_minus)/(2.*dlnk)+1.;
       ppm->alpha_s = (lnpk_plus-2.*lnpk_pivot+lnpk_minus)/pow(dlnk,2);
 
-<<<<<<< HEAD
       class_test(ppt->dmeff_Vrms_dynamic == _TRUE_,
                  ppm->error_message,
                  "Vrms depends on knowing A_s and n_s before primorial module is called. Must use analytic_Pk.");
 
-=======
->>>>>>> master
       /** - expression for alpha_s comes from:
 
               `ns_2 = (lnpk_plus-lnpk_pivot)/(dlnk)+1`

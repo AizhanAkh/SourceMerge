@@ -24,12 +24,8 @@ int input_init_from_arguments(
                               struct transfers *ptr,
                               struct primordial *ppm,
                               struct spectra *psp,
-<<<<<<< HEAD
-                              struct nonlinear * pnl,
-=======
                               struct nonlinear *pnl,
                               struct nonlinear_pt *pnlpt,
->>>>>>> master
                               struct lensing *ple,
                               struct output *pop,
                               ErrorMsg errmsg
@@ -177,10 +173,7 @@ int input_init_from_arguments(
                         ppm,
                         psp,
                         pnl,
-<<<<<<< HEAD
-=======
                         pnlpt,
->>>>>>> master
                         ple,
                         pop,
                         errmsg),
@@ -209,12 +202,8 @@ int input_init(
                struct transfers *ptr,
                struct primordial *ppm,
                struct spectra *psp,
-<<<<<<< HEAD
-               struct nonlinear * pnl,
-=======
                struct nonlinear *pnl,
                struct nonlinear_pt *pnlpt,
->>>>>>> master
                struct lensing *ple,
                struct output *pop,
                ErrorMsg errmsg
@@ -410,10 +399,7 @@ int input_init(
                                      ppm,
                                      psp,
                                      pnl,
-<<<<<<< HEAD
-=======
                                      pnlpt,
->>>>>>> master
                                      ple,
                                      pop,
                                      errmsg),
@@ -453,10 +439,7 @@ int input_init(
                                      ppm,
                                      psp,
                                      pnl,
-<<<<<<< HEAD
-=======
                                      pnlpt,
->>>>>>> master
                                      ple,
                                      pop,
                                      errmsg),
@@ -526,12 +509,8 @@ int input_read_parameters(
                           struct transfers *ptr,
                           struct primordial *ppm,
                           struct spectra *psp,
-<<<<<<< HEAD
-                          struct nonlinear * pnl,
-=======
                           struct nonlinear *pnl,
                           struct nonlinear_pt *pnlpt,
->>>>>>> master
                           struct lensing *ple,
                           struct output *pop,
                           ErrorMsg errmsg
@@ -541,13 +520,8 @@ int input_read_parameters(
 
   /** - define local variables */
 
-<<<<<<< HEAD
   int flag1,flag2,flag3,flag4;
   double param1,param2,param3,param4;
-=======
-  int flag1,flag2,flag3;
-  double param1,param2,param3;
->>>>>>> master
   int N_ncdm=0,n,entries_read;
   int int1,fileentries;
   double scf_lambda;
@@ -594,10 +568,7 @@ int input_read_parameters(
                                   ppm,
                                   psp,
                                   pnl,
-<<<<<<< HEAD
-=======
                                   pnlpt,
->>>>>>> master
                                   ple,
                                   pop),
              errmsg,
@@ -795,7 +766,6 @@ int input_read_parameters(
 
   Omega_tot += pba->Omega0_cdm;
 
-<<<<<<< HEAD
   /* Omega_0_dmeff (dmeff) */
   class_call(parser_read_double(pfc,"Omega_dmeff",&param1,&flag1,errmsg),
              errmsg,
@@ -1023,8 +993,6 @@ int input_read_parameters(
 
   }
 
-=======
->>>>>>> master
   /** - Omega_0_dcdmdr (DCDM) */
   class_call(parser_read_double(pfc,"Omega_dcdmdr",&param1,&flag1,errmsg),
              errmsg,
@@ -2402,13 +2370,10 @@ int input_read_parameters(
     if (flag2 == _TRUE_) {
       ppt->k_max_for_pk=param2;
     }
-<<<<<<< HEAD
-=======
       
 /* Here I brutally force P_k_max_h/Mpc = 100. since only for this value the non-linear module is tailored */
       
       ppt->k_max_for_pk=100.*pba->h;
->>>>>>> master
 
     class_call(parser_read_list_of_doubles(pfc,
                                            "z_pk",
@@ -2424,11 +2389,6 @@ int input_read_parameters(
                  errmsg,
                  "you want to write some output for %d different values of z, hence you should increase _Z_PK_NUM_MAX_ in include/output.h to at least this number",
                  int1);
-<<<<<<< HEAD
-      pop->z_pk_num = int1;
-      for (i=0; i<int1; i++) {
-        pop->z_pk[i] = pointer1[i];
-=======
         
         pop->z_pk_num = int1;
         pnlpt->z_pk_num = int1;
@@ -2437,7 +2397,6 @@ int input_read_parameters(
         pop->z_pk[i] = pointer1[i];
         pnlpt->z_pk[i] = pop->z_pk[i];
   //      printf("redshift requested %lf\n",pnlpt->z_pk[i]);
->>>>>>> master
       }
       free(pointer1);
     }
@@ -2727,13 +2686,9 @@ int input_read_parameters(
   }
 
   /** (f) parameter related to the non-linear spectra computation */
-<<<<<<< HEAD
-
-=======
     
     /* M.I. Here I read the stuff from the .ini file */
-    
->>>>>>> master
+
   class_call(parser_read_string(pfc,
                                 "non linear",
                                 &(string1),
@@ -2745,15 +2700,6 @@ int input_read_parameters(
   if (flag1 == _TRUE_) {
 
     class_test(ppt->has_perturbations == _FALSE_, errmsg, "You requested non linear computation but no linear computation. You must set output to tCl or similar.");
-<<<<<<< HEAD
-
-    if ((strstr(string1,"halofit") != NULL) || (strstr(string1,"Halofit") != NULL) || (strstr(string1,"HALOFIT") != NULL)) {
-      pnl->method=nl_halofit;
-      ppt->has_nl_corrections_based_on_delta_m = _TRUE_;
-    }
-
-  }
-=======
       
       if ((strstr(string1,"spt") != NULL) || (strstr(string1,"Spt") != NULL) || (strstr(string1,"SPT") != NULL)) {
           pnlpt->method = nlpt_spt;
@@ -2796,10 +2742,6 @@ int input_read_parameters(
     }
     
     
-    
-    
-    
->>>>>>> master
 
   /** (g) amount of information sent to standard output (none if all set to zero) */
 
@@ -2823,12 +2765,9 @@ int input_read_parameters(
 
   class_read_int("nonlinear_verbose",
                  pnl->nonlinear_verbose);
-<<<<<<< HEAD
-=======
     
   class_read_int("nonlinear_pt_verbose",
                    pnlpt->nonlinear_pt_verbose);
->>>>>>> master
 
   class_read_int("lensing_verbose",
                  ple->lensing_verbose);
@@ -2843,10 +2782,7 @@ int input_read_parameters(
   class_read_double("a_ini_over_a_today_default",ppr->a_ini_over_a_today_default);
   class_read_double("back_integration_stepsize",ppr->back_integration_stepsize);
   class_read_double("tol_background_integration",ppr->tol_background_integration);
-<<<<<<< HEAD
   class_read_double("tol_Tdmeff_integration",ppr->tol_Tdmeff_integration);
-=======
->>>>>>> master
   class_read_double("tol_initial_Omega_r",ppr->tol_initial_Omega_r);
   class_read_double("tol_ncdm_initial_w",ppr->tol_ncdm_initial_w);
   class_read_double("safe_phi_scf",ppr->safe_phi_scf);
@@ -3153,14 +3089,11 @@ int input_read_parameters(
     pop->write_perturbations = _TRUE_;
   }
 
-<<<<<<< HEAD
   /* Save A_s, n_s, k_pivot to perturbations module to use if pth->dmeff_Vrms_dynamic is on. */
   ppt->A_s = ppm->A_s;
   ppt->n_s = ppm->n_s;
   ppt->k_pivot = ppm->k_pivot;
 
-=======
->>>>>>> master
   /** - (i.4.) shall we write primordial spectra in a file? */
 
   class_call(parser_read_string(pfc,"write primordial",&string1,&flag1,errmsg),
@@ -3187,10 +3120,7 @@ int input_read_parameters(
  * @param ppm Input: pointer to primordial structure
  * @param psp Input: pointer to spectra structure
  * @param pnl Input: pointer to nonlinear structure
-<<<<<<< HEAD
-=======
  * @param pnlpt Input: pointer to nonlinear_pt structure
->>>>>>> master
  * @param ple Input: pointer to lensing structure
  * @param pop Input: pointer to output structure
  * @return the error status
@@ -3203,12 +3133,8 @@ int input_default_params(
                          struct transfers *ptr,
                          struct primordial *ppm,
                          struct spectra *psp,
-<<<<<<< HEAD
-                         struct nonlinear * pnl,
-=======
                          struct nonlinear *pnl,
                          struct nonlinear_pt *pnlpt,
->>>>>>> master
                          struct lensing *ple,
                          struct output *pop
                          ) {
@@ -3243,7 +3169,6 @@ int input_default_params(
   pba->Omega0_ur = 3.046*7./8.*pow(4./11.,4./3.)*pba->Omega0_g;
   pba->Omega0_b = 0.022032/pow(pba->h,2);
   pba->Omega0_cdm = 0.12038/pow(pba->h,2);
-<<<<<<< HEAD
   pba->Omega0_dmeff = 0.0;
   pba->m_dmeff = 1.0 * 1.0e9 * _eV_ / (_c_ * _c_);
   pba->ratio_dmeff2cdm = 0.0;
@@ -3261,8 +3186,6 @@ int input_default_params(
   pth->calculation_a_la_dvorkin_et_al = _FALSE_;
   pth->Tracy_and_Cora_Helium = _FALSE_;
   pth->dmeff_interacting_species = hydrogen;
-=======
->>>>>>> master
   pba->Omega0_dcdmdr = 0.0;
   pba->Omega0_dcdm = 0.0;
   pba->Gamma_dcdm = 0.0;
@@ -3289,11 +3212,7 @@ int input_default_params(
   pba->Omega0_k = 0.;
   pba->K = 0.;
   pba->sgnK = 0;
-<<<<<<< HEAD
   pba->Omega0_lambda = 1.-pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot-pba->Omega0_dcdmdr-pba->Omega0_dmeff;
-=======
-  pba->Omega0_lambda = 1.-pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot-pba->Omega0_dcdmdr;
->>>>>>> master
   pba->Omega0_fld = 0.;
   pba->a_today = 1.;
   pba->w0_fld=-1.;
@@ -3408,10 +3327,8 @@ int input_default_params(
   ppt->selection_mean[0]=1.;
   ppt->selection_width[0]=0.1;
 
-<<<<<<< HEAD
   ppt->Vrms_convergence_tol = 1e-3; /**< convergence test for the iterating Vrms/Vfull. Iterations are stopped if the required convergence is reached. default = 1e-3 */
-=======
->>>>>>> master
+
   /** - primordial structure */
 
   ppm->primordial_spec_type = analytic_Pk;
@@ -3530,13 +3447,10 @@ int input_default_params(
   /** - nonlinear structure */
 
   pnl->method = nl_none;
-<<<<<<< HEAD
-=======
   pnlpt->method = nlpt_none;
     
     pnlpt->z_pk_num = 1;
     pnlpt->z_pk[0] = 0.;
->>>>>>> master
 
   /** - all verbose parameters */
 
@@ -3547,10 +3461,7 @@ int input_default_params(
   ppm->primordial_verbose = 0;
   psp->spectra_verbose = 0;
   pnl->nonlinear_verbose = 0;
-<<<<<<< HEAD
-=======
   pnlpt->nonlinear_pt_verbose = 0;
->>>>>>> master
   ple->lensing_verbose = 0;
   pop->output_verbose = 0;
 
@@ -3578,10 +3489,8 @@ int input_default_precision ( struct precision * ppr ) {
   ppr->a_ini_over_a_today_default = 1.e-14;
   ppr->back_integration_stepsize = 7.e-3;
   ppr->tol_background_integration = 1.e-2;
-<<<<<<< HEAD
+
   ppr->tol_Tdmeff_integration = 1.e-2;
-=======
->>>>>>> master
 
   ppr->tol_initial_Omega_r = 1.e-4;
   ppr->tol_M_ncdm = 1.e-7;
@@ -3801,16 +3710,13 @@ int input_default_precision ( struct precision * ppr ) {
   ppr->halofit_sigma_precision = 0.05;
   ppr->halofit_tol_sigma = 1.e-6;
 
-<<<<<<< HEAD
-=======
     /**
      * - parameters related to nonlinear one-loop module
      */
     
   ppr->nmax_nlpt = 240;
     
-    
->>>>>>> master
+
   /**
    * - parameter related to lensing
    */
@@ -3987,10 +3893,7 @@ int input_try_unknown_parameters(double * unknown_parameter,
   struct primordial pm;       /* for primordial spectra */
   struct spectra sp;          /* for output spectra */
   struct nonlinear nl;        /* for non-linear spectra */
-<<<<<<< HEAD
-=======
   struct nonlinear_pt nlpt;        /* for non-linear spectra */
->>>>>>> master
   struct lensing le;          /* for lensed spectra */
   struct output op;           /* for output files */
   int i;
@@ -4017,10 +3920,7 @@ int input_try_unknown_parameters(double * unknown_parameter,
                                    &pm,
                                    &sp,
                                    &nl,
-<<<<<<< HEAD
-=======
                                    &nlpt,
->>>>>>> master
                                    &le,
                                    &op,
                                    errmsg),
@@ -4097,8 +3997,6 @@ int input_try_unknown_parameters(double * unknown_parameter,
     nl.nonlinear_verbose = 0;
     class_call(nonlinear_init(&pr,&ba,&th,&pt,&pm,&nl), nl.error_message, errmsg);
   }
-<<<<<<< HEAD
-=======
     
     if (pfzw->required_computation_stage >= cs_nonlinear_pt){
         if (input_verbose>2)
@@ -4106,28 +4004,19 @@ int input_try_unknown_parameters(double * unknown_parameter,
         nlpt.nonlinear_pt_verbose = 0;
         class_call(nonlinear_pt_init(&pr,&ba,&th,&pt,&pm,&nlpt), nlpt.error_message, errmsg);
     }
->>>>>>> master
 
   if (pfzw->required_computation_stage >= cs_transfer){
     if (input_verbose>2)
       printf("Stage 6: transfer\n");
     tr.transfer_verbose = 0;
-<<<<<<< HEAD
-    class_call(transfer_init(&pr,&ba,&th,&pt,&nl,&tr), tr.error_message, errmsg);
-=======
     class_call(transfer_init(&pr,&ba,&th,&pt,&nlpt,&nl,&tr), tr.error_message, errmsg);
->>>>>>> master
   }
 
   if (pfzw->required_computation_stage >= cs_spectra){
     if (input_verbose>2)
       printf("Stage 7: spectra\n");
     sp.spectra_verbose = 0;
-<<<<<<< HEAD
-    class_call(spectra_init(&pr,&ba,&pt,&pm,&nl,&tr,&sp),sp.error_message, errmsg);
-=======
     class_call(spectra_init(&pr,&ba,&pt,&pm,&nlpt,&nl,&tr,&sp),sp.error_message, errmsg);
->>>>>>> master
   }
 
 
@@ -4183,12 +4072,9 @@ int input_try_unknown_parameters(double * unknown_parameter,
   if (pfzw->required_computation_stage >= cs_nonlinear){
     class_call(nonlinear_free(&nl), nl.error_message, errmsg);
   }
-<<<<<<< HEAD
-=======
   if (pfzw->required_computation_stage >= cs_nonlinear_pt){
         class_call(nonlinear_pt_free(&nlpt), nlpt.error_message, errmsg);
     }
->>>>>>> master
   if (pfzw->required_computation_stage >= cs_primordial){
     class_call(primordial_free(&pm), pm.error_message, errmsg);
   }
@@ -4223,10 +4109,7 @@ int input_get_guess(double *xguess,
   struct primordial pm;       /* for primordial spectra */
   struct spectra sp;          /* for output spectra */
   struct nonlinear nl;        /* for non-linear spectra */
-<<<<<<< HEAD
-=======
   struct nonlinear_pt nlpt;        /* for non-linear loop corrections to the spectra */
->>>>>>> master
   struct lensing le;          /* for lensed spectra */
   struct output op;           /* for output files */
   int i;
@@ -4245,10 +4128,7 @@ int input_get_guess(double *xguess,
                                    &pm,
                                    &sp,
                                    &nl,
-<<<<<<< HEAD
-=======
                                    &nlpt,
->>>>>>> master
                                    &le,
                                    &op,
                                    errmsg),
@@ -4270,11 +4150,7 @@ int input_get_guess(double *xguess,
       ba.H0 = ba.h *  1.e5 / _c_;
       break;
     case Omega_dcdmdr:
-<<<<<<< HEAD
       Omega_M = ba.Omega0_cdm+ba.Omega0_dmeff+ba.Omega0_dcdmdr+ba.Omega0_b;
-=======
-      Omega_M = ba.Omega0_cdm+ba.Omega0_dcdmdr+ba.Omega0_b;
->>>>>>> master
       /* This formula is exact in a Matter + Lambda Universe, but only
          for Omega_dcdm, not the combined.
          sqrt_one_minus_M = sqrt(1.0 - Omega_M);
@@ -4293,11 +4169,7 @@ int input_get_guess(double *xguess,
       //printf("x = Omega_ini_guess = %g, dxdy = %g\n",*xguess,*dxdy);
       break;
     case omega_dcdmdr:
-<<<<<<< HEAD
       Omega_M = ba.Omega0_cdm+ba.Omega0_dmeff+ba.Omega0_dcdmdr+ba.Omega0_b;
-=======
-      Omega_M = ba.Omega0_cdm+ba.Omega0_dcdmdr+ba.Omega0_b;
->>>>>>> master
       /* This formula is exact in a Matter + Lambda Universe, but only
          for Omega_dcdm, not the combined.
          sqrt_one_minus_M = sqrt(1.0 - Omega_M);
@@ -4341,11 +4213,7 @@ int input_get_guess(double *xguess,
           Omega_ini_dcdm -> Omega_dcdmdr and
           omega_ini_dcdm -> omega_dcdmdr */
       Omega0_dcdmdr *=pfzw->target_value[index_guess];
-<<<<<<< HEAD
       Omega_M = ba.Omega0_cdm+ba.Omega0_dmeff+Omega0_dcdmdr+ba.Omega0_b;
-=======
-      Omega_M = ba.Omega0_cdm+Omega0_dcdmdr+ba.Omega0_b;
->>>>>>> master
       gamma = ba.Gamma_dcdm/ba.H0;
       if (gamma < 1)
         a_decay = 1.0;

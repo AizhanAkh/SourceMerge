@@ -117,10 +117,7 @@ int transfer_init(
                   struct background * pba,
                   struct thermo * pth,
                   struct perturbs * ppt,
-<<<<<<< HEAD
-=======
                   struct nonlinear_pt * pnlpt,
->>>>>>> master
                   struct nonlinear * pnl,
                   struct transfers * ptr
                   ) {
@@ -230,11 +227,7 @@ int transfer_init(
               ptr->md_size*sizeof(double**),
               ptr->error_message);
 
-<<<<<<< HEAD
-  class_call(transfer_perturbation_copy_sources_and_nl_corrections(ppt,pnl,ptr,sources),
-=======
   class_call(transfer_perturbation_copy_sources_and_nl_corrections(ppt,pnlpt,pnl,ptr,sources),
->>>>>>> master
              ptr->error_message,
              ptr->error_message);
 
@@ -399,11 +392,7 @@ int transfer_init(
              ptr->error_message,
              ptr->error_message);
 
-<<<<<<< HEAD
-  class_call(transfer_perturbation_sources_free(ppt,pnl,ptr,sources),
-=======
   class_call(transfer_perturbation_sources_free(ppt,pnlpt,pnl,ptr,sources),
->>>>>>> master
              ptr->error_message,
              ptr->error_message);
 
@@ -633,10 +622,7 @@ int transfer_indices_of_transfers(
 
 int transfer_perturbation_copy_sources_and_nl_corrections(
                                                           struct perturbs * ppt,
-<<<<<<< HEAD
-=======
                                                           struct nonlinear_pt * pnlpt,
->>>>>>> master
                                                           struct nonlinear * pnl,
                                                           struct transfers * ptr,
                                                           double *** sources
@@ -656,15 +642,10 @@ int transfer_perturbation_copy_sources_and_nl_corrections(
     for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
 
       for (index_tp = 0; index_tp < ppt->tp_size[index_md]; index_tp++) {
-<<<<<<< HEAD
-
-        if ((pnl->method != nl_none) && (_scalars_) &&
-=======
           
  //   if (pnlpt->method != nlpt_none || pnl->method != nl_none){
         
         if ((pnlpt->method != nlpt_none || pnl->method != nl_none) && (_scalars_) &&
->>>>>>> master
             (((ppt->has_source_delta_m == _TRUE_) && (index_tp == ppt->index_tp_delta_m)) ||
              ((ppt->has_source_theta_m == _TRUE_) && (index_tp == ppt->index_tp_theta_m)) ||
              ((ppt->has_source_phi == _TRUE_) && (index_tp == ppt->index_tp_phi)) ||
@@ -676,27 +657,16 @@ int transfer_perturbation_copy_sources_and_nl_corrections(
                       ppt->k_size[index_md]*ppt->tau_size*sizeof(double),
                       ptr->error_message);
 
-<<<<<<< HEAD
-          for (index_tau=0; index_tau<ppt->tau_size; index_tau++) {
-            for (index_k=0; index_k<ppt->k_size[index_md]; index_k++) {
-=======
                 if (pnlpt->method != nlpt_none){
           for (index_tau=0; index_tau<ppt->tau_size; index_tau++) {
             for (index_k=0; index_k<ppt->k_size[index_md]; index_k++) {
-                
->>>>>>> master
+ 
               sources[index_md]
                 [index_ic * ppt->tp_size[index_md] + index_tp]
                 [index_tau * ppt->k_size[index_md] + index_k] =
                 ppt->sources[index_md]
                 [index_ic * ppt->tp_size[index_md] + index_tp]
                 [index_tau * ppt->k_size[index_md] + index_k]
-<<<<<<< HEAD
-                * pnl->nl_corr_density[index_tau * ppt->k_size[index_md] + index_k];
-            }
-          }
-        }
-=======
                 * pnlpt->nl_corr_density[index_tau * ppt->k_size[index_md] + index_k];
                 
                 
@@ -722,18 +692,13 @@ int transfer_perturbation_copy_sources_and_nl_corrections(
                 }
         }
         
->>>>>>> master
         else {
           sources[index_md][index_ic * ppt->tp_size[index_md] + index_tp] =
             ppt->sources[index_md][index_ic * ppt->tp_size[index_md] + index_tp];
         }
-<<<<<<< HEAD
-      }
-=======
+
       } // end of index_tp loop
-        
-        
->>>>>>> master
+
     }
   }
 
@@ -786,10 +751,7 @@ int transfer_perturbation_source_spline(
 
 int transfer_perturbation_sources_free(
                                        struct perturbs * ppt,
-<<<<<<< HEAD
-=======
                                        struct nonlinear_pt * pnlpt,
->>>>>>> master
                                        struct nonlinear * pnl,
                                        struct transfers * ptr,
                                        double *** sources
@@ -801,13 +763,9 @@ int transfer_perturbation_sources_free(
   for (index_md = 0; index_md < ptr->md_size; index_md++) {
     for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
       for (index_tp = 0; index_tp < ppt->tp_size[index_md]; index_tp++) {
-<<<<<<< HEAD
-        if ((pnl->method != nl_none) && (_scalars_) &&
-=======
           
         /*
           if ((pnlpt->method != nlpt_none) && (pnl->method == nl_none) && (_scalars_) &&
->>>>>>> master
             (((ppt->has_source_delta_m == _TRUE_) && (index_tp == ppt->index_tp_delta_m)) ||
              ((ppt->has_source_theta_m == _TRUE_) && (index_tp == ppt->index_tp_theta_m)) ||
              ((ppt->has_source_phi == _TRUE_) && (index_tp == ppt->index_tp_phi)) ||
@@ -817,8 +775,6 @@ int transfer_perturbation_sources_free(
 
           free(sources[index_md][index_ic * ppt->tp_size[index_md] + index_tp]);
         }
-<<<<<<< HEAD
-=======
           */
           
           
@@ -833,7 +789,6 @@ int transfer_perturbation_sources_free(
                   free(sources[index_md][index_ic * ppt->tp_size[index_md] + index_tp]);
               }
           
->>>>>>> master
       }
     }
     free(sources[index_md]);

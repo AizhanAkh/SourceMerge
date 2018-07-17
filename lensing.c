@@ -85,10 +85,7 @@ int lensing_init(
                  struct precision * ppr,
                  struct perturbs * ppt,
                  struct spectra * psp,
-<<<<<<< HEAD
-=======
                  struct nonlinear_pt * pnlpt,
->>>>>>> master
                  struct nonlinear * pnl,
                  struct lensing * ple
                  ) {

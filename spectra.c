@@ -841,11 +841,7 @@ int spectra_pk_nl_at_z(
   /** Summary: */
 
   /** - define local variables */
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> master
   int last_index;
   int index_k;
   double tau,ln_tau;
@@ -900,10 +896,7 @@ int spectra_pk_nl_at_z(
                                           psp->error_message),
                  psp->error_message,
                  psp->error_message);
-<<<<<<< HEAD
-=======
-        
->>>>>>> master
+
     }
     else {
 
@@ -919,10 +912,6 @@ int spectra_pk_nl_at_z(
                                           psp->error_message),
                  psp->error_message,
                  psp->error_message);
-<<<<<<< HEAD
-=======
-        
->>>>>>> master
     }
   }
 
@@ -938,8 +927,6 @@ int spectra_pk_nl_at_z(
 
 }
 
-<<<<<<< HEAD
-=======
 
 
 int spectra_pk_nl_bias_at_z(
@@ -1156,7 +1143,6 @@ int spectra_pk_nl_bias_at_z(
 }
 
 
->>>>>>> master
 /**
  * Non-linear total matter power spectrum for arbitrary wavenumber and redshift.
  *
@@ -1180,20 +1166,12 @@ int spectra_pk_nl_bias_at_z(
  * @return the error status
  */
 
-<<<<<<< HEAD
-=======
 // This routing is used in the python wrapper
 
->>>>>>> master
 int spectra_pk_nl_at_k_and_z(
                              struct background * pba,
                              struct primordial * ppm,
                              struct spectra * psp,
-<<<<<<< HEAD
-                             double k,
-                             double z,
-                             double * pk_tot /* pointer to a single number (must be already allocated) */
-=======
                              struct nonlinear * pnl,
                              struct nonlinear_pt * pnlpt,
                              double k,
@@ -1206,24 +1184,16 @@ int spectra_pk_nl_at_k_and_z(
                              double * pk_tot_IG2G2,
                              double * pk_tot_IFG2,
                              double * pk_tot_CTR
->>>>>>> master
                              ) {
 
   /** Summary: */
 
   /** - define local variables */
-<<<<<<< HEAD
-=======
-    
->>>>>>> master
 
   int index_md;
   int last_index;
 
   double * spectrum_at_z = NULL;
-<<<<<<< HEAD
-  double * spline;
-=======
   double * spectrum_Id2d2_at_z = NULL;
     double * spectrum_Id2_at_z = NULL;
     double * spectrum_IG2_at_z = NULL;
@@ -1239,7 +1209,6 @@ int spectra_pk_nl_at_k_and_z(
      double * spline_IG2G2;
     double * spline_IFG2;
     double * spline_CTR;
->>>>>>> master
 
   index_md = psp->index_md_scalars;
 
@@ -1253,10 +1222,6 @@ int spectra_pk_nl_at_k_and_z(
   class_alloc(spectrum_at_z,
               psp->ln_k_size*sizeof(double),
               psp->error_message);
-<<<<<<< HEAD
-
-  class_call(spectra_pk_nl_at_z(pba,
-=======
     
     class_alloc(spectrum_Id2d2_at_z,
                 psp->ln_k_size*sizeof(double),
@@ -1289,15 +1254,12 @@ int spectra_pk_nl_at_k_and_z(
 
     if (pnlpt->method == nlpt_none && pnl->method != nl_none){
     class_call(spectra_pk_nl_at_z(pba,
->>>>>>> master
                                 psp,
                                 logarithmic,
                                 z,
                                 spectrum_at_z),
              psp->error_message,
              psp->error_message);
-<<<<<<< HEAD
-=======
     }
     
     if(pnlpt->method != nlpt_none && pnl->method == nl_none){
@@ -1318,16 +1280,12 @@ int spectra_pk_nl_at_k_and_z(
     }
     
     
-    
->>>>>>> master
 
   /** - get its second derivatives with spline, then interpolate, then convert to linear format */
 
   class_alloc(spline,
               sizeof(double)*psp->ic_ic_size[index_md]*psp->ln_k_size,
               psp->error_message);
-<<<<<<< HEAD
-=======
     
     class_alloc(spline_Id2d2,
                 sizeof(double)*psp->ic_ic_size[index_md]*psp->ln_k_size,
@@ -1356,7 +1314,6 @@ int spectra_pk_nl_at_k_and_z(
     class_alloc(spline_CTR,
                 sizeof(double)*psp->ic_ic_size[index_md]*psp->ln_k_size,
                 psp->error_message);
->>>>>>> master
 
   class_call(array_spline_table_lines(psp->ln_k,
                                       psp->ln_k_size,
@@ -1382,13 +1339,8 @@ int spectra_pk_nl_at_k_and_z(
              psp->error_message);
 
   *pk_tot = exp(*pk_tot);
-<<<<<<< HEAD
-
   free(spectrum_at_z);
   free(spline);
-=======
-     free(spectrum_at_z);
-      free(spline);
     
     // Id2d2
     
@@ -1613,16 +1565,11 @@ int spectra_pk_nl_at_k_and_z(
     free(spectrum_CTR_at_z);
     free(spline_CTR);
     
-    
->>>>>>> master
 
   return _SUCCESS_;
 
 }
 
-
-<<<<<<< HEAD
-=======
 
 
 int spectra_pk_nl_halofit_at_k_and_z(
@@ -1705,7 +1652,6 @@ int spectra_pk_nl_halofit_at_k_and_z(
 }
 
 
->>>>>>> master
 /**
  * Matter transfer functions \f$ T_i(k) \f$ for arbitrary redshift and for all
  * initial conditions.
@@ -1914,10 +1860,7 @@ int spectra_init(
                  struct background * pba,
                  struct perturbs * ppt,
                  struct primordial * ppm,
-<<<<<<< HEAD
-=======
                  struct nonlinear_pt *pnlpt,
->>>>>>> master
                  struct nonlinear *pnl,
                  struct transfers * ptr,
                  struct spectra * psp
@@ -1968,21 +1911,13 @@ int spectra_init(
 
   if ((ppt->has_pk_matter == _TRUE_) || (ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
 
-<<<<<<< HEAD
-    class_call(spectra_k_and_tau(pba,ppt,pnl,psp),
-=======
     class_call(spectra_k_and_tau(pba,ppt,pnlpt,pnl,psp),
->>>>>>> master
                psp->error_message,
                psp->error_message);
 
     if (ppt->has_pk_matter == _TRUE_) {
 
-<<<<<<< HEAD
-      class_call(spectra_pk(pba,ppt,ppm,pnl,psp),
-=======
       class_call(spectra_pk(pba,ppt,ppm,pnlpt,pnl,psp),
->>>>>>> master
                  psp->error_message,
                  psp->error_message);
 
@@ -2006,7 +1941,6 @@ int spectra_init(
     psp->ln_k_size=0;
   }
 
-<<<<<<< HEAD
   /** - deal with \f$ V_rms \f$ for dmeff (or cdm in absence of dmeff) */
 
   if (ppt->has_velocity_transfers == _TRUE_) {
@@ -2018,8 +1952,6 @@ int spectra_init(
     psp->Vrms_dmeff=NULL;
   }
 
-=======
->>>>>>> master
   /* if there is one isocurvature mode, compute and store in the psp
      structure the isocurvature contribution to some bandpowers in
      different ranges of l, and the contribution to the primordial
@@ -2184,11 +2116,6 @@ int spectra_free(
 
           free(psp->ln_tau_nl);
           free(psp->ln_pk_nl);
-<<<<<<< HEAD
-
-          if (psp->ln_tau_nl_size > 1) {
-            free(psp->ddln_pk_nl);
-=======
           free(psp->ln_pk_nl_Id2d2);
             free(psp->ln_pk_nl_Id2);
             free(psp->ln_pk_nl_IG2);
@@ -2206,7 +2133,6 @@ int spectra_free(
                free(psp->ddln_pk_nl_IG2G2);
               free(psp->ddln_pk_nl_IFG2);
               free(psp->ddln_pk_nl_CTR);
->>>>>>> master
           }
         }
 
@@ -2220,7 +2146,6 @@ int spectra_free(
         }
       }
     }
-<<<<<<< HEAD
 
     if (psp->Vrms_dmeff != NULL){
       free(psp->ln_DVrms2_dmeff);
@@ -2230,8 +2155,6 @@ int spectra_free(
       free(psp->Vflow_k_dmeff);
     }
 
-=======
->>>>>>> master
   }
 
   for (index_md=0; index_md < psp->md_size; index_md++)
@@ -2534,10 +2457,7 @@ int spectra_indices(
   class_define_index(psp->index_tr_delta_g,ppt->has_source_delta_g,index_tr,1);
   class_define_index(psp->index_tr_delta_b,ppt->has_source_delta_b,index_tr,1);
   class_define_index(psp->index_tr_delta_cdm,ppt->has_source_delta_cdm,index_tr,1);
-<<<<<<< HEAD
   class_define_index(psp->index_tr_delta_dmeff,ppt->has_source_delta_dmeff,index_tr,1);
-=======
->>>>>>> master
   class_define_index(psp->index_tr_delta_dcdm,ppt->has_source_delta_dcdm,index_tr,1);
   class_define_index(psp->index_tr_delta_scf,ppt->has_source_delta_scf,index_tr,1);
   class_define_index(psp->index_tr_delta_fld,ppt->has_source_delta_fld,index_tr,1);
@@ -2558,10 +2478,7 @@ int spectra_indices(
   class_define_index(psp->index_tr_theta_g,ppt->has_source_theta_g,index_tr,1);
   class_define_index(psp->index_tr_theta_b,ppt->has_source_theta_b,index_tr,1);
   class_define_index(psp->index_tr_theta_cdm,ppt->has_source_theta_cdm,index_tr,1);
-<<<<<<< HEAD
   class_define_index(psp->index_tr_theta_dmeff,ppt->has_source_theta_dmeff,index_tr,1);
-=======
->>>>>>> master
   class_define_index(psp->index_tr_theta_dcdm,ppt->has_source_theta_dcdm,index_tr,1);
   class_define_index(psp->index_tr_theta_scf,ppt->has_source_theta_scf,index_tr,1);
   class_define_index(psp->index_tr_theta_fld,ppt->has_source_theta_fld,index_tr,1);
@@ -3205,7 +3122,6 @@ int spectra_compute_cl(
 
 }
 
-<<<<<<< HEAD
 int spectra_vrms_dmeff(
                        struct background * pba,
                        struct perturbs * ppt,
@@ -3486,8 +3402,6 @@ int spectra_vrms_dmeff(
   return _SUCCESS_;
 }
 
-=======
->>>>>>> master
 /**
  * This routine computes the values of k and tau at which the matter
  * power spectra \f$ P(k,\tau)\f$ and the matter transfer functions \f$ T_i(k,\tau)\f$
@@ -3502,10 +3416,7 @@ int spectra_vrms_dmeff(
 int spectra_k_and_tau(
                       struct background * pba,
                       struct perturbs * ppt,
-<<<<<<< HEAD
-=======
                       struct nonlinear_pt *pnlpt,
->>>>>>> master
                       struct nonlinear *pnl,
                       struct spectra * psp
                       ) {
@@ -3598,17 +3509,11 @@ int spectra_k_and_tau(
         ln_tau_size. But the same table ln_tau will be used for
         both. */
 
-<<<<<<< HEAD
-  if (pnl->method != nl_none) {
 
-    index_tau=ppt->tau_size-psp->ln_tau_size;
-    while (ppt->tau_sampling[index_tau] < pnl->tau[pnl->index_tau_min_nl]) {
-=======
   if (pnlpt->method != nlpt_none && pnl->method == nl_none) {
 
     index_tau=ppt->tau_size-psp->ln_tau_size;
     while (ppt->tau_sampling[index_tau] < pnlpt->tau[pnlpt->index_tau_min_nl]) {
->>>>>>> master
       index_tau++;
     }
     psp->ln_tau_nl_size=ppt->tau_size-index_tau;
@@ -3620,8 +3525,7 @@ int spectra_k_and_tau(
     }
 
   }
-<<<<<<< HEAD
-=======
+
     
 //        printf("Everything is OK in 'spectra_k_and_tau'\n");
     
@@ -3642,7 +3546,6 @@ int spectra_k_and_tau(
         
     }
     
->>>>>>> master
 
   return _SUCCESS_;
 }
@@ -3663,10 +3566,7 @@ int spectra_pk(
                struct background * pba,
                struct perturbs * ppt,
                struct primordial * ppm,
-<<<<<<< HEAD
-=======
                struct nonlinear_pt *pnlpt,
->>>>>>> master
                struct nonlinear *pnl,
                struct spectra * psp
                ) {
@@ -3707,13 +3607,6 @@ int spectra_pk(
               sizeof(double)*psp->ln_tau_size*psp->ln_k_size,
               psp->error_message);
 
-<<<<<<< HEAD
-  if (pnl->method != nl_none) {
-
-    class_alloc(psp->ln_pk_nl,
-                sizeof(double)*psp->ln_tau_nl_size*psp->ln_k_size,
-                psp->error_message);
-=======
     
     if (pnlpt->method != nlpt_none || pnl->method != nl_none) {
         
@@ -3750,7 +3643,6 @@ int spectra_pk(
             class_alloc(psp->ln_pk_nl_CTR,
                   sizeof(double)*psp->ln_tau_nl_size*psp->ln_k_size,
                   psp->error_message);
->>>>>>> master
 
     /* possible index shift between the first value of time used for
              the linear spectrum and that for the non-linear power
@@ -3760,12 +3652,6 @@ int spectra_pk(
                "This should never happen",
                psp->error_message,
                psp->error_message);
-<<<<<<< HEAD
-  }
-  else {
-    psp->ln_pk_nl = NULL;
-  }
-=======
     }
     /*
   else {
@@ -3821,7 +3707,6 @@ int spectra_pk(
     
 //        printf("Everything is OK in 'spectra_pk' 1.5\n");
     
->>>>>>> master
 
   for (index_tau=0 ; index_tau < psp->ln_tau_size; index_tau++) {
     for (index_k=0; index_k<psp->ln_k_size; index_k++) {
@@ -3898,16 +3783,6 @@ int spectra_pk(
       psp->ln_pk_l[index_tau * psp->ln_k_size + index_k] = ln_pk_tot;
 
       /* if non-linear corrections required, compute the total non-linear matter power spectrum */
-<<<<<<< HEAD
-
-      if ((pnl->method != nl_none) && (index_tau >= delta_index_nl)) {
-
-        psp->ln_pk_nl[(index_tau-delta_index_nl) * psp->ln_k_size + index_k] =
-          ln_pk_tot
-          + 2.*log(pnl->nl_corr_density[(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size[index_md] + index_k]);
-
-      }
-=======
         
         /* Here the non-linear module is being called */
 
@@ -3955,8 +3830,7 @@ int spectra_pk(
             
         }
         
-        
->>>>>>> master
+ 
     }
   }
 
@@ -4004,13 +3878,8 @@ int spectra_pk(
 
   /**- if interpolation of \f$ P_{NL}(k,\tau)\f$ will be needed (as a function of tau),
      compute array of second derivatives in view of spline interpolation */
-<<<<<<< HEAD
-
-  if (pnl->method != nl_none) {
-=======
     
   if (pnlpt->method != nlpt_none && pnl->method == nl_none) {
->>>>>>> master
     if (psp->ln_tau_nl_size > 1) {
 
       class_alloc(psp->ddln_pk_nl,sizeof(double)*psp->ln_tau_nl_size*psp->ln_k_size,psp->error_message);
@@ -4024,13 +3893,7 @@ int spectra_pk(
                                           psp->error_message),
                  psp->error_message,
                  psp->error_message);
-<<<<<<< HEAD
 
-    }
-  }
-
-=======
-        
         
         class_alloc(psp->ddln_pk_nl_Id2d2,sizeof(double)*psp->ln_tau_nl_size*psp->ln_k_size,psp->error_message);
         
@@ -4145,9 +4008,7 @@ int spectra_pk(
         }
     }
 
-    
-    
->>>>>>> master
+
   free (primordial_pk);
 
   return _SUCCESS_;
@@ -4420,7 +4281,6 @@ int spectra_matter_transfers(
 
         }
 
-<<<<<<< HEAD
         /* T_dmeff(k,tau) */
 
         if (pba->has_dmeff == _TRUE_) {
@@ -4456,8 +4316,6 @@ int spectra_matter_transfers(
 
         }
 
-=======
->>>>>>> master
         /* T_dcdm(k,tau) */
 
         if (pba->has_dcdm == _TRUE_) {
@@ -4802,10 +4660,7 @@ int spectra_output_tk_titles(struct background *pba,
       class_store_columntitle(titles,"d_g",_TRUE_);
       class_store_columntitle(titles,"d_b",_TRUE_);
       class_store_columntitle(titles,"d_cdm",pba->has_cdm);
-<<<<<<< HEAD
       class_store_columntitle(titles,"d_dmeff",pba->has_dmeff);
-=======
->>>>>>> master
       class_store_columntitle(titles,"d_fld",pba->has_fld);
       class_store_columntitle(titles,"d_ur",pba->has_ur);
       if (pba->has_ncdm == _TRUE_) {
@@ -4830,10 +4685,7 @@ int spectra_output_tk_titles(struct background *pba,
       class_store_columntitle(titles,"t_g",_TRUE_);
       class_store_columntitle(titles,"t_b",_TRUE_);
       class_store_columntitle(titles,"t_cdm",((pba->has_cdm == _TRUE_) && (ppt->gauge != synchronous)));
-<<<<<<< HEAD
       class_store_columntitle(titles,"t_dmeff",pba->has_dmeff == _TRUE_);
-=======
->>>>>>> master
       class_store_columntitle(titles,"t_fld",pba->has_fld);
       class_store_columntitle(titles,"t_ur",pba->has_ur);
       if (pba->has_ncdm == _TRUE_) {
@@ -4853,10 +4705,7 @@ int spectra_output_tk_titles(struct background *pba,
 
     class_store_columntitle(titles,"k (h/Mpc)",_TRUE_);
     class_store_columntitle(titles,"-T_cdm/k2",_TRUE_);
-<<<<<<< HEAD
     class_store_columntitle(titles,"-T_dmeff/k2",_TRUE_);
-=======
->>>>>>> master
     class_store_columntitle(titles,"-T_b/k2",_TRUE_);
     class_store_columntitle(titles,"-T_g/k2",_TRUE_);
     class_store_columntitle(titles,"-T_ur/k2",_TRUE_);
@@ -4948,10 +4797,7 @@ int spectra_output_tk_data(
             class_store_double(dataptr,tk[psp->index_tr_delta_g],ppt->has_source_delta_g,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_delta_b],ppt->has_source_delta_b,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_delta_cdm],ppt->has_source_delta_cdm,storeidx);
-<<<<<<< HEAD
             class_store_double(dataptr,tk[psp->index_tr_delta_dmeff],ppt->has_source_delta_dmeff,storeidx);
-=======
->>>>>>> master
             class_store_double(dataptr,tk[psp->index_tr_delta_fld],ppt->has_source_delta_fld,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_delta_ur],ppt->has_source_delta_ur,storeidx);
             if (pba->has_ncdm == _TRUE_){
@@ -4976,10 +4822,7 @@ int spectra_output_tk_data(
             class_store_double(dataptr,tk[psp->index_tr_theta_g],ppt->has_source_theta_g,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_theta_b],ppt->has_source_theta_b,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_theta_cdm],ppt->has_source_theta_cdm,storeidx);
-<<<<<<< HEAD
             class_store_double(dataptr,tk[psp->index_tr_theta_dmeff],ppt->has_source_theta_dmeff,storeidx);
-=======
->>>>>>> master
             class_store_double(dataptr,tk[psp->index_tr_theta_fld],ppt->has_source_theta_fld,storeidx);
             class_store_double(dataptr,tk[psp->index_tr_theta_ur],ppt->has_source_theta_ur,storeidx);
             if (pba->has_ncdm == _TRUE_){
@@ -4999,10 +4842,7 @@ int spectra_output_tk_data(
 
           /* rescale and reorder the matter transfer functions following the CMBFAST/CAMB convention */
           class_store_double_or_default(dataptr,-tk[psp->index_tr_delta_cdm]/k2,ppt->has_source_delta_cdm,storeidx,0.0);
-<<<<<<< HEAD
           class_store_double_or_default(dataptr,-tk[psp->index_tr_delta_dmeff]/k2,ppt->has_source_delta_dmeff,storeidx,0.0);
-=======
->>>>>>> master
           class_store_double_or_default(dataptr,-tk[psp->index_tr_delta_b]/k2,ppt->has_source_delta_b,storeidx,0.0);
           class_store_double_or_default(dataptr,-tk[psp->index_tr_delta_g]/k2,ppt->has_source_delta_g,storeidx,0.0);
           class_store_double_or_default(dataptr,-tk[psp->index_tr_delta_ur]/k2,ppt->has_source_delta_ur,storeidx,0.0);

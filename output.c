@@ -112,10 +112,7 @@ int output_init(
                 struct primordial * ppm,
                 struct transfers * ptr,
                 struct spectra * psp,
-<<<<<<< HEAD
-=======
                 struct nonlinear_pt * pnlpt,
->>>>>>> master
                 struct nonlinear * pnl,
                 struct lensing * ple,
                 struct output * pop
@@ -151,21 +148,12 @@ int output_init(
     class_call(output_pk(pba,ppt,psp,pop),
                pop->error_message,
                pop->error_message);
-<<<<<<< HEAD
-=======
-      
->>>>>>> master
 
     if (pnl->method != nl_none) {
           class_call(output_pk_nl(pba,ppt,psp,pop),
                      pop->error_message,
                      pop->error_message);
     }
-<<<<<<< HEAD
-  }
-
-  /** - deal with density and matter power spectra */
-=======
       
       
       if (pnlpt->method != nlpt_none) {
@@ -186,19 +174,13 @@ int output_init(
   /** - deal with density and matter power spectra */
     
 
->>>>>>> master
-
   if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
 
     class_call(output_tk(pba,ppt,psp,pop),
                pop->error_message,
                pop->error_message);
   }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> master
   /** - deal with background quantities */
 
   if (pop->write_background == _TRUE_) {
@@ -238,18 +220,9 @@ int output_init(
                pop->error_message);
 
   }
-<<<<<<< HEAD
 
   return _SUCCESS_;
 
-=======
-    
-  return _SUCCESS_;
-
-    
-
-    
->>>>>>> master
 }
 
 /**
@@ -962,10 +935,6 @@ int output_pk_nl(
 
   double * pk_tot; /* array with argument pk_tot[index_k] */
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> master
   int index_k;
   int index_z;
 
@@ -987,11 +956,7 @@ int output_pk_nl(
 
     /** - second, open only the relevant files, and write a heading in each of them */
 
-<<<<<<< HEAD
-    sprintf(file_name,"%s%s%s",pop->root,redshift_suffix,"pk_nl.dat");
-=======
     sprintf(file_name,"%s%s%s",pop->root,redshift_suffix,"pk_nl_halofit.dat");
->>>>>>> master
 
     class_call(output_open_pk_file(pba,
                                    psp,
@@ -1007,10 +972,7 @@ int output_pk_nl(
     class_alloc(pk_tot,
                 psp->ln_k_size*sizeof(double),
                 pop->error_message);
-<<<<<<< HEAD
-=======
-      
->>>>>>> master
+
 
     /** - third, compute P(k) for each k (if several ic's, compute it for each ic and compute also the total); if z_pk = 0, this is done by directly reading inside the pre-computed table; if not, this is done by interpolating the table at the correct value of tau. */
 
@@ -1035,11 +997,6 @@ int output_pk_nl(
                                     pk_tot),
                  psp->error_message,
                  pop->error_message);
-<<<<<<< HEAD
-=======
-        
-        
->>>>>>> master
     }
 
     /** - fourth, write in files */
@@ -1066,8 +1023,6 @@ int output_pk_nl(
 }
 
 
-<<<<<<< HEAD
-=======
 // Misha: my brand new output is here !!!
 
 int output_pk_nl_pt(
@@ -1279,7 +1234,6 @@ int output_pk_nl_pt(
 
 
 
->>>>>>> master
 /**
  * This routines writes the output in files for matter transfer functions \f$ T_i(k)\f$'s.
  *
@@ -1944,8 +1898,6 @@ int output_open_pk_file(
   return _SUCCESS_;
 }
 
-<<<<<<< HEAD
-=======
 
 /**
  * This routine opens one file where some  NONLINEAR P(k)'s will be written, and writes
@@ -2001,9 +1953,6 @@ int output_open_pk_nlpt_file(
 
 
 
-
-
->>>>>>> master
 /**
  * This routine writes one line with k and P(k)
  *
@@ -2013,10 +1962,7 @@ int output_open_pk_nlpt_file(
  * @return the error status
  */
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 int output_one_line_of_pk(
                           FILE * pkfile,
                           double one_k,
@@ -2031,8 +1977,7 @@ int output_one_line_of_pk(
   return _SUCCESS_;
 
 }
-<<<<<<< HEAD
-=======
+
 
 /**
  * This routine writes # lines with k and P(k), and bias tracers' loop integrals
@@ -2074,4 +2019,3 @@ int output_one_line_many_columns_of_pk(
     return _SUCCESS_;
     
 }
->>>>>>> master

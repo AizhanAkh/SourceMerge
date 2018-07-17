@@ -78,11 +78,7 @@ int nonlinear_init(
 
   if (pnl->method == nl_none) {
     if (pnl->nonlinear_verbose > 0)
-<<<<<<< HEAD
-      printf("No non-linear spectra requested. Nonlinear module skipped.\n");
-=======
       printf("No HALOFIT power spectra requested. Nonlinear HALOFIT module skipped.\n");
->>>>>>> master
   }
 
   /** (b) Compute for HALOFIT non-linear spectrum */
@@ -375,11 +371,7 @@ int nonlinear_halofit(
 
   class_alloc(pvecback,pba->bg_size*sizeof(double),pnl->error_message);
 
-<<<<<<< HEAD
   Omega0_m = (pba->Omega0_cdm + pba->Omega0_b + pba->Omega0_ncdm_tot + pba->Omega0_dcdm + pba->Omega0_dmeff);
-=======
-  Omega0_m = (pba->Omega0_cdm + pba->Omega0_b + pba->Omega0_ncdm_tot + pba->Omega0_dcdm);
->>>>>>> master
 
   /* Halofit needs w0 = w_fld today */
   class_call(background_w_fld(pba,pba->a_today,&w0,&dw_over_da_fld,&integral_fld), pba->error_message, pnl->error_message);
